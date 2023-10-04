@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:23:09 by anmande           #+#    #+#             */
-/*   Updated: 2023/10/04 12:54:01 by anmande          ###   ########.fr       */
+/*   Updated: 2023/10/04 17:26:31 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,28 @@ void	my_mlx_pixel_put(t_win *win, int x, int y, int color)
 	char	*dst;
 
 	dst = win->addr + (y * win->line_len + x * (win->bpp / 8));
-	(void)color;
-	(void)dst;
+	*(unsigned int *)dst = color;
 }
 
-void	draw_squar(t_win *win, int color)
+void	draw_squar(t_win *win, int color, int x_map, int y_map)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < 100)
+	i = x_map * 10;
+	while (i < (x_map + 1) * 10)
 	{
-		j = 0;
-		while (j < 100)
+		j = y_map * 10;
+		while (j < (y_map + 1) * 10)
 		{
 			my_mlx_pixel_put(win, i, j, color);
 			j++;
 		}
 		i++;
 	}
+	mlx_put_image_to_window(win->mlx, win->win, win->img, 0, 0);
 }
+
 
 char *get_next_line(int fd)
 {
@@ -65,26 +66,26 @@ char *get_next_line(int fd)
 
 void	draw_map(t_win *win, int fd)
 {
-	int		i;
-	int		j;
+	int 	i;
+	int 	j;
 	char	*line;
 
-	i = 0;
-	while (i < 10)
+	j = 0;
+	while (j < 6)
 	{
+		i = 0;
 		line = get_next_line(fd);
-		j = 0;
-		while (j < 10)
+		printf("%s\n", line);
+		while (line[i])
 		{
-			if (line[j] == '1')
-				draw_squar(win, 0x00FF0000);
-			else if (line[j] == '0')
-				draw_squar(win, 0x00000000);
-			else if (line[j] == '2')
-				draw_squar(win, 0x0000FF00);
-			j++;
+			if (line[i] == '1')
+				draw_squar(win, 0xFF0000, i, j);
+			else if (line[i] == '0')
+				draw_squar(win, 0x00FF00, i, j);
+			i++;
 		}
-		i++;
+		j++;
 	}
-
+	//draw_squar(win, 0x0000FF);
+	(void)fd;
 }

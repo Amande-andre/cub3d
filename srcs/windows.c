@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:24:57 by anmande           #+#    #+#             */
-/*   Updated: 2023/10/04 12:59:51 by anmande          ###   ########.fr       */
+/*   Updated: 2023/10/04 16:38:14 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	create_map_2D(t_win *win, char *av)
 	win->fd = open(av, O_RDONLY);
 	if (win->fd == -1)
 		return (0);
-	//draw_map(win, win->fd);
-	draw_squar(win, 0x0000FF);
+	draw_map(win, win->fd);
+	//draw_squar(win, 0x0000FF);
 	return (0);
 }
 int	ft_close_win(int key, t_win *win)

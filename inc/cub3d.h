@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:54:45 by anmande           #+#    #+#             */
-/*   Updated: 2023/10/04 12:33:01 by anmande          ###   ########.fr       */
+/*   Updated: 2023/10/04 17:14:04 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ int		set_window(t_win *win);
 int		ft_close_win(int key, t_win *win);
 int		create_map_2D(t_win *win, char *av);
 void	draw_map(t_win *win, int fd);
-void	draw_squar(t_win *win, int color);
+void	draw_squar(t_win *win, int color, int x_map, int y_map);
 
 #endif
